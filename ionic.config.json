@@ -1,5 +1,7 @@
 {
   "name": "sql-bicycles",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

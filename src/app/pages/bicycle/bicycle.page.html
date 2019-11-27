@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="bicycles"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Bicycle</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="saveBicycle()">
+        <ion-icon name="save"></ion-icon>
+      </ion-button>
+      <ion-button (click)="deleteBicycle()" id="delete-button-up">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="bicycleForm">
+    <ion-item>
+      <ion-label position="stacked">Bicycle Brand</ion-label>
+      <ion-input
+        [class.invalid]="!bicycleForm.controls.brand.valid && (bicycleForm.controls.brand.dirty || submitAttempt)"
+        formControlName="brand" type="text"></ion-input>
+    </ion-item>
+    <ion-item
+      *ngIf="!bicycleForm.controls.brand.valid && !bicycleForm.controls.brand.pending && (bicycleForm.controls.brand.dirty || submitAttempt)">
+      <p>brand not valid!</p>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Bicycle Model</ion-label>
+      <ion-input
+        [class.invalid]="!bicycleForm.controls.model.valid && (bicycleForm.controls.model.dirty || submitAttempt)"
+        formControlName="model" type="text"></ion-input>
+    </ion-item>
+    <ion-item
+      *ngIf="!bicycleForm.controls.model.valid && !bicycleForm.controls.model.pending && (bicycleForm.controls.model.dirty || submitAttempt)">
+      <p>*model not valid!</p>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Bicycle Year</ion-label>
+      <ion-input
+        [class.invalid]="!bicycleForm.controls.year.valid && (bicycleForm.controls.year.dirty || submitAttempt)"
+        formControlName="year" type="number"></ion-input>
+    </ion-item>
+    <ion-item
+      *ngIf="!bicycleForm.controls.year.valid && !bicycleForm.controls.year.pending && (bicycleForm.controls.year.dirty || submitAttempt)">
+      <p>*year not valid!</p>
+    </ion-item>
+  </form>
+
+  <!-- fab placed to the bottom and start and on the bottom edge of the content overlapping footer with a list to the right -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="save"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="saveBicycle()">
+        <ion-icon name="save"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="deleteBicycle()" id="delete-button-down">
+        <ion-icon name="trash"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  
+</ion-content>

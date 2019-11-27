@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <!-- <ion-buttons slot="start">
+      <ion-back-button defaultHref="categories"></ion-back-button>
+    </ion-buttons> -->
+    <ion-title>Bicycles</ion-title>
+    <ion-buttons slot="end">
+      <ion-button href="/bicycle/0">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item button *ngFor="let bicycle of bicycles" [routerLink]="['/', 'bicycle', bicycle.id]">
+      <ion-label>
+        <h2>{{bicycle.brand}} {{bicycle.model}}</h2>
+        <p>{{bicycle.year}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/', 'bicycle', 0]">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
