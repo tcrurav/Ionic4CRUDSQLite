@@ -13,20 +13,20 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 })
 export class BicyclePage implements OnInit {
 
-  public bicycleForm: FormGroup;
-  public submitAttempt: boolean = false;
+  // public bicycleForm: FormGroup;
+  // public submitAttempt: boolean = false;
 
-  //private bicycle: Bicycle = { id: 0, brand: '', model: '', year: 0 };
+  private bicycle: Bicycle = { id: 0, brand: '', model: '', year: 0 };
 
   constructor(private db: DatabaseService, private location: Location,
     private route: ActivatedRoute, public loading: LoadingService,
     public formBuilder: FormBuilder
   ) {
-    this.bicycleForm = formBuilder.group({
-      brand: ['', Validators.compose([Validators.maxLength(30), Validators.required])],
-      model: ['', Validators.compose([Validators.maxLength(30), Validators.required])],
-      year: ['', Validators.required]
-    });
+    // this.bicycleForm = formBuilder.group({
+    //   brand: ['', Validators.compose([Validators.maxLength(30), Validators.required])],
+    //   model: ['', Validators.compose([Validators.maxLength(30), Validators.required])],
+    //   year: ['', Validators.required]
+    // });
   }
 
   ngOnInit() {
@@ -36,7 +36,8 @@ export class BicyclePage implements OnInit {
 
       if (bicycleId != 0) {
         this.db.getBicycle(bicycleId).then(data => {
-          this.bicycleForm.setValue({ brand: data.brand, model: data.model, year: data.year});
+          // this.bicycleForm.setValue({ brand: data.brand, model: data.model, year: data.year});
+          this.bicycle = data;
         });
       } else {
         document.getElementById("delete-button-up").style.display = "none";
@@ -48,33 +49,33 @@ export class BicyclePage implements OnInit {
   saveBicycle() {
     console.log("tibu: addBicycle()");
 
-    this.submitAttempt = true;
+    // this.submitAttempt = true;
 
-    if (this.bicycleForm.valid) {
+    // if (this.bicycleForm.valid) {
 
       this.loading.present();
 
-      if (this.bicycleForm.value.id == 0) {
-        this.db.insertBicycle(this.bicycleForm.value).then((res) => {
+      if (this.bicycle.id == 0) {
+        this.db.insertBicycle(this.bicycle).then((res) => {
           console.log("tibu: addBicycle() before going back");
           this.loading.dismiss();
           this.location.back();
         });
       } else {
-        this.db.updateBicycle(this.bicycleForm.value).then((res) => {
+        this.db.updateBicycle(this.bicycle).then((res) => {
           console.log("tibu: updateBicycle() before going back");
           this.loading.dismiss();
           this.location.back();
         });
       }
-    }
+    // }
 
   }
 
   deleteBicycle() {
     this.loading.present();
 
-    this.db.deleteBicycle(this.bicycleForm.value.id).then(() => {
+    this.db.deleteBicycle(this.bicycle.id).then(() => {
       this.loading.dismiss();
       this.location.back();
     });
